@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import styles from "./header.module.scss"
 
@@ -22,12 +22,26 @@ export default () => {
     suggest: { to: "/suggest", text: "Suggest Genderwise words" },
     "sign-in": { to: "/sign-in", text: "Sign in" },
   }
-  
+
+  const [showMenu, setShowMenu] = useState(false)
+
+  const onBurgerTap = () => {
+    setShowMenu(!showMenu)
+  }
+
   return (
     <header className={styles.header}>
       <Logo to="/" text="GenderWise" />
 
-      <nav>
+      <div className={styles.menuBtn} onClick={onBurgerTap}>
+        <span
+          className={`${styles.menuBtn__burger} ${
+            showMenu ? styles.menuBtn__burger__open : ""
+          }`}
+        ></span>
+      </div>
+
+      <nav className={`${styles.header__nav} ${showMenu ? "" : styles.header__nav__hide}` }>
         <ul className={styles.header__navList}>
           {Object.values(nav).map((menu, idx) => (
             <HeaderLink to={menu.to} text={menu.text} key={idx} />
