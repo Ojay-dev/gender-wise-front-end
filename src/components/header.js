@@ -33,7 +33,8 @@ export default () => {
     <header className={styles.header}>
       <Logo to="/" text="GenderWise" />
 
-      <div className={styles.menuBtn} onClick={onBurgerTap}>
+      <div className={styles.menuBtn} onClick={onBurgerTap} onKeyDown={onBurgerTap} role="button"
+  tabIndex="0">
         <span
           className={`${styles.menuBtn__burger} ${
             showMenu ? styles.menuBtn__burger__open : ""
