@@ -5,6 +5,10 @@
   width: 28px;
   cursor: pointer;
 
+  @media screen and(min-width: 1025px){
+    display: none;
+  }
+
   &__burger {
     position: absolute;
     right: 0;
