@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 // import { Link } from "gatsby"
 import Layout from "../components/layout"
 import styles from "./try-it.module.scss"
@@ -9,6 +9,8 @@ export default function Home() {
     output: "",
     regex: new RegExp("", "gi"),
   })
+
+  const textInputRef = useRef(null);
 
   const handleInput = e => {
     const { name, value } = e.target
@@ -23,6 +25,7 @@ export default function Home() {
       matches.filter((elem, i) => {
         return matches.indexOf(elem) === i
       })
+
     if (matches && matches.length > 0) {
       matches.forEach(async word => {
         try {
@@ -42,7 +45,10 @@ export default function Home() {
     }
     setState(state => ({ ...state, output }))
   }, [state.input, state.regex])
+
   useEffect(() => {
+    textInputRef.current.focus();
+
     const kickOff = async () => {
       try {
         const req = await fetch(
@@ -70,6 +76,7 @@ export default function Home() {
             onChange={handleInput}
             value={state.input}
             className={styles.inputSection__textarea}
+            ref={textInputRef}
           />
         </div>
 
